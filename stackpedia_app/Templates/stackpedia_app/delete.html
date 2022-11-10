@@ -1,0 +1,49 @@
+{% extends 'Base.html' %}
+
+{% block title %} StackPedia - Create Post  {% endblock %}
+
+{% block content %}
+<style>
+    #cke_id_content {
+        width: 100% !important;
+    }
+    .post-main-container{
+        display: flex;
+        justify-content: center;
+        height: 100%;
+    }
+    .postContainer {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        height: auto;
+        width: 50%;
+        padding: 30px 20px 20px 20px;
+        border-radius: 30px;
+        margin-bottom: 20px;
+    }
+    #container h3 {
+        text-align: center;
+    }
+</style>
+<div class="post-main-container">
+    <div class="postContainer" id="container">
+        <h3><strong>Are you sure you want to delete this Post?.</strong></h3>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            {{form.media}}
+            <input type="submit" class="btn btn-danger" value="Delete">
+        </form>
+    </div>
+</div>
+<script>
+    let inputFields = document.getElementsByTagName('input')
+    let bodyField = document.getElementById('id_content')
+    let selectField = document.getElementById('id_category')
+    for(let i = 0; i < inputFields.length; i++){
+        inputFields[i].classList.add('form-control')
+    }
+    bodyField.classList.add('form-control')
+    selectField.classList.add('form-select')
+</script>
+
+{% endblock %}
