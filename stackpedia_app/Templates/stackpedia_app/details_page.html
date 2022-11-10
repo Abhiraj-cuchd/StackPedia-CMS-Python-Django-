@@ -1,112 +1,158 @@
-{% extends 'Base.html' %}
-
-{% block title %} StackPedia - {{post.slug}} {% endblock %}
-
-{% block content %}
+{% extends 'Base.html' %} {% block title %} StackPedia - {{post.slug}} {%
+endblock %} {% block content %}
 
 <!-- Page Content-->
 <section class="py-5">
-    <div class="container px-5 my-5">
-        <div class="row gx-5">
-            <!-- <div class="col-lg-3">
-                <div class="d-flex align-items-center mt-lg-5 mb-4">
-                    <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
-                    <div class="ms-3">
-                        <div class="fw-bold">Valerie Luna</div>
-                        <div class="text-muted">News, Business</div>
-                    </div>
-                </div>
-            </div> -->
-            <div class="col-lg-9">
-                <!-- Post content-->
-                <article>
-                    <!-- Post header-->
-                    <header class="mb-4">
-                        <!-- Post title-->
-                        <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
-                        <!-- Post meta content-->
-                        <div class="text-muted fst-italic mb-2"> posted on January 1, 2022 by Abhiraj Ghosh</div>
-                        <!-- Post categories-->
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ post.category }}</a>
-                        <a href=" {% url 'update' post.slug %} ">
-                            <button class="btn btn-dark">Update</button>
-                        </a>
-                        <a href=" {% url 'delete' post.slug %} ">
-                            <button class="btn btn-danger">Delete</button>
-                        </a>
-                    </header>
-                    <!-- Preview image figure-->
-                    <figure class="mb-4"><img class="img-fluid rounded" src="{{ post.image.url }}" alt="..." /></figure>
-                    <!-- Post content-->
-                    <section class="mb-5">
-                       <p style="font-size: 30px;">{{ post.content | safe }}</p>
-                    </section>
-                </article>
-                <!-- Comments section-->
-                <section>
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <!-- Comment form-->
-                            <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
-                            <!-- Comment with nested comments-->
-                            <div class="d-flex mb-4">
-                                <!-- Parent comment-->
-                                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">Commenter Name</div>
-                                    If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                                    <!-- Child comment 1-->
-                                    <div class="d-flex mt-4">
-                                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                        <div class="ms-3">
-                                            <div class="fw-bold">Commenter Name</div>
-                                            And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                        </div>
-                                    </div>
-                                    <!-- Child comment 2-->
-                                    <div class="d-flex mt-4">
-                                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                        <div class="ms-3">
-                                            <div class="fw-bold">Commenter Name</div>
-                                            When you put money directly to a problem, it makes a good headline.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single comment-->
-                            <div class="d-flex">
-                                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">Commenter Name</div>
-                                    When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+  <div class="container px-5 my-5">
+    <div class="row gx-5">
+      <div class="col-lg-9">
+        <!-- Post content-->
+        <article>
+          <!-- Post header-->
+          <header class="mb-4">
+            <!-- Post title-->
+            <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
+            <!-- Post meta content-->
+            <div class="text-muted fst-italic mb-2">
+              posted on January 1, 2022 by Abhiraj Ghosh
             </div>
-            <div class="col-lg-3">
-                <br>
-                <h1>Recent Posts</h1>
-                <br>
-                {% for post in posts %}
-                
-                <div class="card" style="width: 18rem; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
-                    <img src="{{ post.image.url }}" class="card-img-top" alt="...">
-                    <div class="card-body" style="color: #2A0944;">
-                      <h5 class="card-title">{{ post.title }}</h5>
-                      <p class="card-text">{{ post.content | truncatechars:60 | safe }}</p>
-                      <a href="{% url 'details_page' post.slug %}" class="btn btn-dark" >View Post</a>
+            <!-- Post categories-->
+            <a
+              class="badge bg-secondary text-decoration-none link-light"
+              href="#!"
+              >{{ post.category }}</a
+            >
+            <a href=" {% url 'update' post.slug %} ">
+              <button class="btn btn-dark">Update</button>
+            </a>
+            <a href=" {% url 'delete' post.slug %} ">
+              <button class="btn btn-danger">Delete</button>
+            </a>
+          </header>
+          <!-- Preview image figure-->
+          <figure class="mb-4">
+            <img
+              class="img-fluid rounded"
+              src="{{ post.image.url }}"
+              alt="..."
+            />
+          </figure>
+          <!-- Post content-->
+          <section class="mb-5">
+            <p style="font-size: 30px">{{ post.content | safe }}</p>
+          </section>
+        </article>
+        <!-- Comments section-->
+        <section>
+          <div class="card bg-light">
+            <div class="card-body">
+              <!-- Comment form-->
+              <form class="mb-4">
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  placeholder="Join the discussion and leave a comment!"
+                ></textarea>
+              </form>
+              <!-- Comment with nested comments-->
+              <div class="d-flex mb-4">
+                <!-- Parent comment-->
+                <div class="flex-shrink-0">
+                  <img
+                    class="rounded-circle"
+                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                    alt="..."
+                  />
+                </div>
+                <div class="ms-3">
+                  <div class="fw-bold">Commenter Name</div>
+                  If you're going to lead a space frontier, it has to be
+                  government; it'll never be private enterprise. Because the
+                  space frontier is dangerous, and it's expensive, and it has
+                  unquantified risks.
+                  <!-- Child comment 1-->
+                  <div class="d-flex mt-4">
+                    <div class="flex-shrink-0">
+                      <img
+                        class="rounded-circle"
+                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="ms-3">
+                      <div class="fw-bold">Commenter Name</div>
+                      And under those conditions, you cannot establish a
+                      capital-market evaluation of that enterprise. You can't
+                      get investors.
                     </div>
                   </div>
-                  <br>
-                {% endfor %}
-                
+                  <!-- Child comment 2-->
+                  <div class="d-flex mt-4">
+                    <div class="flex-shrink-0">
+                      <img
+                        class="rounded-circle"
+                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="ms-3">
+                      <div class="fw-bold">Commenter Name</div>
+                      When you put money directly to a problem, it makes a good
+                      headline.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Single comment-->
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <img
+                    class="rounded-circle"
+                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                    alt="..."
+                  />
+                </div>
+                <div class="ms-3">
+                  <div class="fw-bold">Commenter Name</div>
+                  When I look at the universe and all the ways the universe
+                  wants to kill us, I find it hard to reconcile that with
+                  statements of beneficence.
+                </div>
+              </div>
             </div>
+          </div>
+        </section>
+      </div>
+      <div class="col-lg-3">
+        <br />
+        <h1>Recent Posts</h1>
+        <br />
+        {% for post in posts %}
+
+        <div
+          class="card"
+          style="
+            width: 18rem;
+            box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+              rgba(0, 0, 0, 0.23) 0px 6px 6px;
+          "
+        >
+          <img src="{{ post.image.url }}" class="card-img-top" alt="..." />
+          <div class="card-body" style="color: #2a0944">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">
+              {{ post.content | truncatechars:60 | safe }}
+            </p>
+            <a href="{% url 'details_page' post.slug %}" class="btn btn-dark"
+              >View Post</a
+            >
+          </div>
         </div>
+        <br />
+        {% endfor %}
+      </div>
     </div>
+  </div>
 </section>
-
-
 
 {% endblock %}
