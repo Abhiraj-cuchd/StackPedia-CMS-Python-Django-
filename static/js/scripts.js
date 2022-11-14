@@ -6,8 +6,3 @@
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
 
-// let alertBtn = document.getElementsByClassName('close');
-// alertBtn.addEventListener('click', function() {
-//     alertBtn.parentElement.style.display = 'none'
-// });
-

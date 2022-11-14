@@ -1,5 +1,7 @@
-{% extends 'Base.html' %} {% block title %} StackPedia - {{post.slug}} {%
-endblock %} {% block content %}
+{% extends 'Base.html' %} 
+{% block title %} StackPedia - {{post.slug}} {%endblock %} 
+
+{% block content %}
 
 <!-- Page Content-->
 <section class="py-5">
@@ -12,22 +14,38 @@ endblock %} {% block content %}
           <header class="mb-4">
             <!-- Post title-->
             <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
-            <!-- Post meta content-->
-            <div class="text-muted fst-italic mb-2">
-              posted on January 1, 2022 by Abhiraj Ghosh
-            </div>
             <!-- Post categories-->
-            <a
-              class="badge bg-secondary text-decoration-none link-light"
+            <a href="{% url 'profile' post.writer.profile_id %}" style="text-decoration: none ;">
+            <div class="card-footer p-4 pt-0 bh-transparent border-top-0">
+              <div class="d-flex align-items-end justify-content-between">
+                <div class="d-flex align-items-center">
+                  <img style="width: 70px; height:70px" src="{{ post.writer.profilePic.url }}" alt="" class="rounded-circle me-3">
+                  <div class="big">
+                    <div class="fw-bold">{{ post.writer.name }}</div>
+                    <div class="text-muted">{{ post.writer.profession }}</div>
+                    <div class="text-muted">{{ post.created }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+            <div style="display: flex; justify-content: space-between;">
+              <a
+              class="badge bg-secondary text-decoration-none link-light" style="font-size: 20px;"
               href="#!"
               >{{ post.category }}</a
             >
-            <a href=" {% url 'update' post.slug %} ">
-              <button class="btn btn-dark">Update</button>
-            </a>
-            <a href=" {% url 'delete' post.slug %} ">
-              <button class="btn btn-danger">Delete</button>
-            </a>
+            <!-- <div>
+              <a href=" {% url 'update' post.slug %} ">
+                <button class="btn btn-dark">Update</button>
+              </a>
+              <a href=" {% url 'delete' post.slug %} ">
+                <button class="btn btn-danger">Delete</button>
+              </a>
+            </div> -->
+            
+            </div>
+            
           </header>
           <!-- Preview image figure-->
           <figure class="mb-4">

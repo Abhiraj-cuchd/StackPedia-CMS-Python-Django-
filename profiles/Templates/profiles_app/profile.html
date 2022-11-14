@@ -1,0 +1,54 @@
+{% extends 'Base.html' %}
+{% block title %} {{ profile.name }} | StackPedia {% endblock %}
+
+{% block content %}
+
+<div class="header__wrapper">
+  <br>
+    <header></header>
+    <div class="cols__container">
+        <div class="left__col">
+            <div class="img__container">
+                <img src="{{ profile.profilePic.url }}" alt="{{ profile.name }}">
+            </div>
+            <br><br><br><br>
+            <h1>{{ profile.name }}</h1>
+            <h6>@{{ profile.username }}</h6>
+            <p>{{ profile.profession }}</p>
+            <hr>
+            <div class="content">
+              <h3>About Me</h3>
+              <hr>
+                <p>
+                    {{ profile.about }}
+                </p>
+            </div>
+        </div>
+        <div class="right__col">
+            <nav>
+                <ul>
+                    <li><a href="">Recent Posts</a></li>
+                </ul>
+            </nav>
+            
+            <div class="posts">
+                {% for post in profile.post_set.all %}
+                <div class="card img" style="width: 18rem; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+                    rgba(0, 0, 0, 0.23) 0px 6px 6px;">
+                <img src="{{ post.image.url }}" class="card-img-top" alt="..." />
+                <div class="card-body" style="color: #2a0944">
+                  <h5 class="card-title">{{ post.title }}</h5>
+                  <p class="card-text">
+                    {{ post.content | truncatechars:60 | safe }}
+                  </p>
+                  <a href="{% url 'details_page' post.slug %}" class="btn btn-dark">View Post</a>
+                </div>
+              </div>
+              <br> <br>  <br> <br>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

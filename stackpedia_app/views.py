@@ -3,11 +3,15 @@ from .models import Post
 from .forms import PostForm
 from django.utils.text import slugify
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
     posts = Post.objects.all()
-    context = {'posts': posts}
+    pageinator = Paginator(posts, 6)
+    page_number = request.GET.get('page')
+    posts_final = pageinator.get_page(page_number)
+    context = {'posts': posts_final}
     return render(request, 'stackpedia_app/index.html', context)
 
 def details_page(request, slug):
@@ -20,12 +24,14 @@ def details_page(request, slug):
     return render(request, 'stackpedia_app/details_page.html', context)
 
 def create_post(request):
+    profile = request.user.userprofile
     form = PostForm()
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid:
             post = form.save(commit=False)
             post.slug = slugify(post.title)
+            post.writer = profile
             post.save() 
             messages.info(request, 'Post created successfully')
             return redirect('create')
@@ -57,7 +63,6 @@ def deletePost(request, slug):
         post.delete()
         messages.info(request, 'Post Deleted successfully')
         return redirect('index')
-    else:
-        messages.error(request, 'Oops! Post not Deleted')
     context = {'form':form}
     return render(request, 'stackpedia_app/delete.html', context)
+

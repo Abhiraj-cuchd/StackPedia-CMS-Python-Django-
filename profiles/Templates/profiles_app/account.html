@@ -1,0 +1,68 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block title %} {{ account.name }} | StackPedia {% endblock %}
+
+{% block content %}
+<script src="https://kit.fontawesome.com/625bbdee74.js" crossorigin="anonymous"></script>
+<div class="header__wrapper">
+  <br>
+    <header></header>
+    <div class="cols__container">
+        <div class="left__col">
+            <div class="img__container">
+                <img src="{{ account.profilePic.url }}" alt="{{ account.name }}">
+                <a  href= "{% url 'Update_Profile' %}" style="margin-left: 250px; margin-top: -80px; border-radius: 50%; height: 70px; width: 70px; padding-top: 20px;" >
+                <img src="{% static 'assets/edit.webp' %}" style="width:50px; height:50px; margin-left: 150px; margin-top: -65px;" alt="">
+                </a>
+            </div>
+            <br><br><br><br>
+            <h1>{{ account.name }}</h1>
+            <h6>@{{ account.username }}</h6>
+            <p>{{ account.profession }}</p>
+            <hr>
+            <div class="content">
+              <h3>About Me</h3>
+              <hr>
+                <p>
+                    {{ account.about }}
+                </p>
+            </div>
+        </div>
+        <div class="right__col">
+            <nav>
+                <ul>
+                    <li><a href="">Recent Posts</a></li>
+                </ul>
+            </nav>
+            <div class="posts">
+                {% for post in account.post_set.all %}
+                <div
+                class="card img"
+                style="
+                  width: 18rem;
+                  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+                    rgba(0, 0, 0, 0.23) 0px 6px 6px;
+                "
+              >
+                <img src="{{ post.image.url }}" class="card-img-top" alt="..." />
+                <div class="card-body" style="color: #2a0944">
+                  <h5 class="card-title">{{ post.title }}</h5>
+                  <p class="card-text">
+                    {{ post.content | truncatechars:60 | safe }}
+                  </p>
+                  <br>
+                  <a href="{% url 'details_page' post.slug %}" class="btn btn-dark"
+                    >View Post</a
+                  >
+                  <a href="{% url 'update' post.slug %}" class="btn btn-dark">edit</a>
+                  <a href="{% url 'delete' post.slug %}" class="btn btn-danger">delete</a>
+                </div>
+              </div>
+              <br> <br>  <br> <br>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

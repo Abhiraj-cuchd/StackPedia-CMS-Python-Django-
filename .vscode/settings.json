@@ -1,4 +1,5 @@
 {
   "editor.fontFamily": "Ubuntu Mono",
-  "editor.fontSize": 16
+  "editor.fontSize": 16,
+  "git.ignoreLimitWarning": true
 }
