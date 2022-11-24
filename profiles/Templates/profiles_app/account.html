@@ -3,6 +3,13 @@
 {% block title %} {{ account.name }} | StackPedia {% endblock %}
 
 {% block content %}
+<style>
+  .header__wrapper header {
+    width: 100%;
+    min-height: calc(30px + 15vw);
+    background: url("{{ account.get_banner_url }}") no-repeat 50% 20% / cover;
+}
+</style>
 <script src="https://kit.fontawesome.com/625bbdee74.js" crossorigin="anonymous"></script>
 <div class="header__wrapper">
   <br>
@@ -10,19 +17,19 @@
     <div class="cols__container">
         <div class="left__col">
             <div class="img__container">
-                <img src="{{ account.profilePic.url }}" alt="{{ account.name }}">
-                <a  href= "{% url 'Update_Profile' %}" style="margin-left: 250px; margin-top: -80px; border-radius: 50%; height: 70px; width: 70px; padding-top: 20px;" >
+               <img src="{{ account.get_photo_url }}" alt="{{ account.name }}">
+                <a  href= "{% url 'Update_Profile' account.profile_id %}" style="margin-left: 250px; margin-top: -80px; border-radius: 50%; height: 70px; width: 70px; padding-top: 20px;" >
                 <img src="{% static 'assets/edit.webp' %}" style="width:50px; height:50px; margin-left: 150px; margin-top: -65px;" alt="">
                 </a>
             </div>
             <br><br><br><br>
             <h1>{{ account.name }}</h1>
-            <h6>@{{ account.username }}</h6>
+            <h6>@{{ account.get_profile_name }}</h6>
             <p>{{ account.profession }}</p>
             <hr>
             <div class="content">
-              <h3>About Me</h3>
-              <hr>
+              <!-- <h3>About Me</h3>
+              <hr> -->
                 <p>
                     {{ account.about }}
                 </p>

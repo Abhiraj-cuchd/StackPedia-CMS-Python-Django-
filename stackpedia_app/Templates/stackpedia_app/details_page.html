@@ -33,19 +33,16 @@
               <a
               class="badge bg-secondary text-decoration-none link-light" style="font-size: 20px;"
               href="#!"
-              >{{ post.category }}</a
-            >
-            <!-- <div>
-              <a href=" {% url 'update' post.slug %} ">
-                <button class="btn btn-dark">Update</button>
-              </a>
-              <a href=" {% url 'delete' post.slug %} ">
-                <button class="btn btn-danger">Delete</button>
-              </a>
-            </div> -->
-            
-            </div>
-            
+              >{{ post.category }}</a>
+<!--                <div>-->
+<!--                  <a href=" {% url 'update' post.slug %} ">-->
+<!--                    <button class="btn btn-dark">Update</button>-->
+<!--                  </a>-->
+<!--                  <a href=" {% url 'delete' post.slug %} ">-->
+<!--                    <button class="btn btn-danger">Delete</button>-->
+<!--                  </a>-->
+<!--                </div>-->
+<!--            </div>-->
           </header>
           <!-- Preview image figure-->
           <figure class="mb-4">
@@ -62,16 +59,15 @@
         </article>
         <!-- Comments section-->
         <section>
+          <div style="display:flex; justify-content:space-between;">
+            <h3>Comments..</h3>
+            <a href="#" class="btn btn-primary">Add Comment</a>
+          </div>
+          <br>
           <div class="card bg-light">
             <div class="card-body">
               <!-- Comment form-->
               <form class="mb-4">
-                <textarea
-                  class="form-control"
-                  rows="3"
-                  placeholder="Join the discussion and leave a comment!"
-                ></textarea>
-              </form>
               <!-- Comment with nested comments-->
               <div class="d-flex mb-4">
                 <!-- Parent comment-->

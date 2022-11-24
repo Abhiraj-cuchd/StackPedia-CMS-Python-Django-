@@ -10,6 +10,7 @@ class UpdateProfileForm(ModelForm):
         model = UserProfile
         exclude = ['user']
 
+
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User

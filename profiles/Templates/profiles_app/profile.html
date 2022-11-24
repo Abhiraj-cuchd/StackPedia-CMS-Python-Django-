@@ -2,6 +2,21 @@
 {% block title %} {{ profile.name }} | StackPedia {% endblock %}
 
 {% block content %}
+<style>
+  .header__wrapper header {
+    width: 100%;
+    background: url("{{ profile.get_banner_url }}") no-repeat 50% 20% / cover;
+    min-height: calc(15px + 15vw);
+}
+
+.header__wrapper .cols__container .right__col nav {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    justify-content: space-between;
+    flex-direction: column;
+}
+</style>
 
 <div class="header__wrapper">
   <br>
@@ -17,8 +32,8 @@
             <p>{{ profile.profession }}</p>
             <hr>
             <div class="content">
-              <h3>About Me</h3>
-              <hr>
+              <!-- <h3>About Me</h3>
+              <hr> -->
                 <p>
                     {{ profile.about }}
                 </p>

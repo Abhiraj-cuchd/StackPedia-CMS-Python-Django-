@@ -16,7 +16,7 @@
     .postContainer {
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         height: auto;
-        width: 50%;
+        width: 100%;
         padding: 30px 20px 20px 20px;
         border-radius: 30px;
         margin-bottom: 20px;
@@ -24,6 +24,10 @@
     }
     #container h3 {
         text-align: center;
+    }
+
+    .django-ckeditor-widget-edited {
+        display: flex;
     }
 </style>
 <div class="post-main-container">
@@ -44,8 +48,15 @@
     for(let i = 0; i < inputFields.length; i++){
         inputFields[i].classList.add('form-control')
     }
+    let editorFields = document.getElementsByClassName('.django-ckeditor-widget')
     bodyField.classList.add('form-control')
     selectField.classList.add('form-select')
+    editorFields.classList.add('django-ckeditor-widget-edited')
+
+    $(document).ready(function () {
+    $(".django-ckeditor-widget").css("width", "100%")
+ });
+
 </script>
 
 {% endblock %}
