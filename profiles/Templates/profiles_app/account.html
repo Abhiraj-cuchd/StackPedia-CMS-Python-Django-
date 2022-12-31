@@ -6,8 +6,15 @@
 <style>
   .header__wrapper header {
     width: 100%;
-    min-height: calc(30px + 15vw);
+    min-height: calc(15px + 15vw);
     background: url("{{ account.get_banner_url }}") no-repeat 50% 20% / cover;
+}
+.header__wrapper .cols__container .right__col nav {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    justify-content: space-between;
+    flex-direction: column;
 }
 </style>
 <script src="https://kit.fontawesome.com/625bbdee74.js" crossorigin="anonymous"></script>
@@ -41,32 +48,28 @@
                     <li><a href="">Recent Posts</a></li>
                 </ul>
             </nav>
-            <div class="posts">
+            <div class="posts swiper">
+              <div class="swiper-wrapper">
                 {% for post in account.post_set.all %}
-                <div
-                class="card img"
-                style="
-                  width: 18rem;
-                  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-                    rgba(0, 0, 0, 0.23) 0px 6px 6px;
-                "
-              >
-                <img src="{{ post.image.url }}" class="card-img-top" alt="..." />
-                <div class="card-body" style="color: #2a0944">
-                  <h5 class="card-title">{{ post.title }}</h5>
-                  <p class="card-text">
-                    {{ post.content | truncatechars:60 | safe }}
-                  </p>
-                  <br>
-                  <a href="{% url 'details_page' post.slug %}" class="btn btn-dark"
-                    >View Post</a
-                  >
-                  <a href="{% url 'update' post.slug %}" class="btn btn-dark">edit</a>
-                  <a href="{% url 'delete' post.slug %}" class="btn btn-danger">delete</a>
+                <div class="swiper-slide">
+                  <div class="card img" style="width: 18rem;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,rgba(0, 0, 0, 0.23) 0px 6px 6px; ">
+                    <img src="{{ post.image.url }}" class="card-img-top" alt="..." />
+                    <div class="card-body" style="color: #2a0944">
+                      <h5 class="card-title">{{ post.title }}</h5>
+                      <p class="card-text">
+                        {{ post.content | truncatechars:60 | safe }}
+                      </p>
+                      <br>
+                      <a href="{% url 'details_page' post.slug %}" class="btn btn-dark">View Post</a>
+                      <a href="{% url 'update' post.slug %}" class="btn btn-dark">edit</a>
+                      <a href="{% url 'delete' post.slug %}" class="btn btn-danger">delete</a>
+                    </div>
+                  </div>
                 </div>
+                {% endfor %}
               </div>
-              <br> <br>  <br> <br>
-            {% endfor %}
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
             </div>
         </div>
     </div>

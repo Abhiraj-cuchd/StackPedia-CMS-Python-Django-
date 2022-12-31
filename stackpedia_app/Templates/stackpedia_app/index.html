@@ -11,12 +11,16 @@
                     <h1 class="display-5 fw-bolder text-white mb-2">Welcome to Developer's Library</h1>
                     <p class="lead fw-normal text-white-50 mb-4">One stop knowledge sharing portal where budding developers and Tech enthusiasts can gain and share their knowledge through blog articles. Come and become a valued member of our community. </p>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
-                        <a class="btn btn-outline-light btn-lg px-4" href="#!">Explore Blog</a>
+                        {% if user.is_authenticated %}
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'create' %}">Start a Post</a>
+                        {% else %}
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'login_user' %}">Get Started</a>
+                        {% endif %}
+                        <a class="btn btn-outline-light btn-lg px-4" href="{% url 'all_posts' %}">Explore Blog</a>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="{% static 'assets/home-bg.jpg' %}" alt="..." /></div>
+            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid-2 rounded-3 my-5" src="{% static 'assets/home-bg.jpg' %}" alt="..." /></div>
         </div>
     </div>
 </header>
@@ -61,31 +65,9 @@
             </div>
             {% endfor %}
         </div>
-        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-            <ul class="pagination">
-                {% if posts.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="/?page=1" aria-label="First">
-                      <span aria-hidden="true">&laquo;</span>
-                      <span class="sr-only">First</span>
-                    </a>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{posts.previous_page_number}}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                    </a>
-                </li>
-                {% endif %}
-              {% if posts.has_next %}
-              <li class="page-item">
-                <a class="page-link" href="?page={{posts.next_page_number}}" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-              {% endif %}
-            </ul>
-          </nav>
+        <div style="display: flex; justify-content: center;">
+            <a class="btn btn-dark" href="{% url 'all_posts' %}">Explore All Blogs..</a>
+        </div>
         <!-- Call to action-->
         <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
             <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">

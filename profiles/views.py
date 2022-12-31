@@ -48,6 +48,9 @@ def DeleteProfile(request):
     }
     return render(request, 'profiles_app/deleteProfile.html', context)
 
+def deleteComment(request):
+    pass
+
 
 def registerUser(request):
     form = CreateUserForm()

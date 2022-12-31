@@ -4,6 +4,7 @@ import uuid
 
 User = get_user_model()
 
+
 # Create your models here.
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -12,7 +13,7 @@ class UserProfile(models.Model):
     username = models.CharField(max_length=200)
     profession = models.CharField(max_length=200)
     profilePic = models.ImageField(upload_to='img', blank=True, null=True,
-    default='assets/default-profile-pic.jpeg')
+                                   default='assets/default-profile-pic.jpeg')
     profileBanner = models.ImageField(upload_to='img', blank=True, null=True, default='assets/default-banner.png')
     about = models.TextField()
     profile_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True, primary_key=True)
@@ -26,7 +27,7 @@ class UserProfile(models.Model):
             return self.profilePic.url
         else:
             return "/static/assets/default-profile-pic.jpeg"
-    
+
     @property
     def get_banner_url(self):
         if self.profileBanner and hasattr(self.profileBanner, 'url'):

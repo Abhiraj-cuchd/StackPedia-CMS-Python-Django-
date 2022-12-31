@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Post
+from .models import Post, Comment, SubComment, Category
 from .forms import PostForm
 from django.utils.text import slugify
 from django.contrib import messages
@@ -19,9 +19,24 @@ def index(request):
 def details_page(request, slug):
     post = Post.objects.get(slug=slug)
     posts = Post.objects.exclude(post_id=post.post_id)[:5]
+
+    if request.method == 'POST':
+        comm = request.POST.get('comm')
+        comm_id = request.POST.get('comm_id')
+
+        if comm_id:
+            SubComment(post=post, user=request.user.userprofile, comm = comm, comment=Comment.objects.get(id=int(comm_id))).save()
+        else:
+            Comment(post=post, user=request.user.userprofile, comm=comm).save()
+
+    comments = []
+    for c in Comment.objects.filter(post=post):
+        comments.append([c, SubComment.objects.filter(comment=c)])
+
     context = {
         'post': post,
-        'posts': posts
+        'posts': posts,
+        'comments': comments
     }
     return render(request, 'stackpedia_app/details_page.html', context)
 
@@ -70,3 +85,15 @@ def deletePost(request, slug):
         return redirect('index')
     context = {'form': form}
     return render(request, 'stackpedia_app/delete.html', context)
+
+def fetch_all(request):
+    posts = Post.objects.all()
+    categories = Category.objects.all()
+    pageinator = Paginator(posts, 6)
+    page_number = request.GET.get('page')
+    posts_final = pageinator.get_page(page_number)
+    context = {'posts': posts_final, 'categories':categories}
+    return render(request, 'stackpedia_app/fetch_all.html', context)
+
+
+

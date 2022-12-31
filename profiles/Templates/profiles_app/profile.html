@@ -45,8 +45,29 @@
                     <li><a href="">Recent Posts</a></li>
                 </ul>
             </nav>
+            <div class="posts swiper">
+              <div class="swiper-wrapper">
+                {% for post in profile.post_set.all %}
+                <div class="swiper-slide">
+                  <div class="card img" style="width: 18rem;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,rgba(0, 0, 0, 0.23) 0px 6px 6px; ">
+                    <img src="{{ post.image.url }}" class="card-img-top" alt="..." />
+                    <div class="card-body" style="color: #2a0944">
+                      <h5 class="card-title">{{ post.title }}</h5>
+                      <p class="card-text">
+                        {{ post.content | truncatechars:60 | safe }}
+                      </p>
+                      <br>
+                        <a href="{% url 'details_page' post.slug %}" class="btn btn-dark">View Post</a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+            </div>
             
-            <div class="posts">
+            <!-- <div class="posts">
                 {% for post in profile.post_set.all %}
                 <div class="card img" style="width: 18rem; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
                     rgba(0, 0, 0, 0.23) 0px 6px 6px;">
@@ -61,7 +82,7 @@
               </div>
               <br> <br>  <br> <br>
             {% endfor %}
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
